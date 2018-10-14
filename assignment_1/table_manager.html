@@ -5,12 +5,16 @@
 	div {
 		margin-bottom: 20px;
 	}
+
+	table, tr, td {
+		border: 1px solid black;
+	}
 </style>
 
 <!-- Data -->
 <script>
 
-// Don't copy this to any other places in this file. You can just use the "organizations" variable to do your assignment. 
+// Don't copy this to any other places in this file. You can just use the "organizations" variable to do your assignment.
 var organizations = [
 	 {
         "Region": "East Asia & Pacific",
@@ -19,7 +23,7 @@ var organizations = [
         "Organization Name": "200 Square",
         "Organization Type": "For-profit",
         "Sectors": "Housing, construction & real estate",
-        "Description": "200 Square is an online real estate agent in New Zealand.",        
+        "Description": "200 Square is an online real estate agent in New Zealand.",
         "City": "Wellington",
         "State/Region": "Wellington",
         "Founding Year": 2010,
@@ -34,7 +38,7 @@ var organizations = [
         "Organization Name": "21c Consultancy",
         "Organization Type": "For-profit",
         "Sectors": "IT and geospatial",
-        "Description": "21c is ICT innovation consultancy which advises international actors, institutions and governments around the world on technological trends which can affect the way they deliver services.",        
+        "Description": "21c is ICT innovation consultancy which advises international actors, institutions and governments around the world on technological trends which can affect the way they deliver services.",
         "City": "London",
         "State/Region": "",
         "Founding Year": 2015,
@@ -49,7 +53,7 @@ var organizations = [
         "Organization Name": "2GIS",
         "Organization Type": "For-profit",
         "Sectors": "IT and geospatial",
-        "Description": "2GIS is a city information service combined with a map. ",        
+        "Description": "2GIS is a city information service combined with a map. ",
         "City": "Novosibirsk",
         "State/Region": "Novosibirsk Oblast",
         "Founding Year": 1999,
@@ -64,7 +68,7 @@ var organizations = [
         "Organization Name": "2nd City Zoning",
         "Organization Type": "Nonprofit",
         "Sectors": "Housing, construction & real estate",
-        "Description": "An Open City App, 2nd City Zoning is an interactive map that lets you find out how your building is zoned, learn where to locate your business and explore zoning patterns throughout the city.",        
+        "Description": "An Open City App, 2nd City Zoning is an interactive map that lets you find out how your building is zoned, learn where to locate your business and explore zoning patterns throughout the city.",
         "City": "Chicago",
         "State/Region": "Illinois",
         "Founding Year": 2013,
@@ -94,7 +98,7 @@ var organizations = [
         "Organization Name": "360 Yield Center",
         "Organization Type": "For-profit",
         "Sectors": "Agriculture",
-        "Description": "Taking a 360-degree view of key yield-limiting variables, 360 Yield Center develops strategies for better-performing crops and better on-farm profits.",        
+        "Description": "Taking a 360-degree view of key yield-limiting variables, 360 Yield Center develops strategies for better-performing crops and better on-farm profits.",
         "City": "Morton",
         "State/Region": "Illinois",
         "Founding Year": 2014,
@@ -124,7 +128,7 @@ var organizations = [
         "Organization Name": "3Tier (Europe) ",
         "Organization Type": "For-profit",
         "Sectors": "Energy and climate",
-        "Description": "3TIER is a global environmental and industrial measurement company providing weather-driven renewable energy risk assessment and forecasting for wind, solar, and hydro power projects.",        
+        "Description": "3TIER is a global environmental and industrial measurement company providing weather-driven renewable energy risk assessment and forecasting for wind, solar, and hydro power projects.",
         "City": "Helsinki",
         "State/Region": "Uusimaa",
         "Founding Year": 2012,
@@ -139,7 +143,7 @@ var organizations = [
         "Organization Name": "5PSolutions",
         "Organization Type": "For-profit",
         "Sectors": "IT and geospatial",
-        "Description": "5PSolutions are artisans of mobile platforms.",       
+        "Description": "5PSolutions are artisans of mobile platforms.",
         "City": "Fairfax",
         "State/Region": "Virginia",
         "Founding Year": 2007,
@@ -154,7 +158,7 @@ var organizations = [
         "Organization Name": "AAA National",
         "Organization Type": "Other",
         "Sectors": "Transportation and logistics",
-        "Description": "AAA provides services such as travel, automotive, insurance, financial, and discounts.",        
+        "Description": "AAA provides services such as travel, automotive, insurance, financial, and discounts.",
         "City": "Irving",
         "State/Region": "Texas",
         "Founding Year": 1902,
@@ -184,7 +188,7 @@ var organizations = [
         "Organization Name": "ABRELATAM",
         "Organization Type": "Nonprofit",
         "Sectors": "Governance",
-        "Description": "ABRELATAM is an conference that seeks to accelerate the process of opening information through Open Data transparency and promote the Latin America.",        
+        "Description": "ABRELATAM is an conference that seeks to accelerate the process of opening information through Open Data transparency and promote the Latin America.",
         "City": "Santiago",
         "State/Region": "",
         "Founding Year": 2015,
@@ -192,7 +196,7 @@ var organizations = [
         "Type of Data Used": "",
         "profileID": "1687"
     }
-	
+
 ];
 </script>
 
@@ -204,10 +208,66 @@ var organizations = [
 
 <script>
 // outputs the first item of the organizations array. Just for testing.
-// console.log(organizations[0]); 
-console.log("test");
+// console.log(organizations[0]);
+// console.log("test");
 
-// Your JavaScript code goes here
+// I want to find a way to make meta[] rely on the organizations variable but ain't nobody got time
+// for that
+var meta = ['Region', 'Country', 'Country Income Level', 'Organization Name', 'Organization Type',
+'Sectors', 'Description', 'City', 'State/Region', 'Founding Year', 'Size', 'Type of Data Used',
+'ProfileID'];
+
+var nonprofit = 0;
+var age = 0;
+var american = 0;
+var trans = 0;
+var avg_year = 0;
+for (items = 0; items < organizations.length; items++) {
+	if (organizations[items]['Organization Type'] === 'Nonprofit') {
+		nonprofit++;
+	}
+	if (2018 - organizations[items]['Founding Year'] < 10) {
+		age++;
+	}
+	if (organizations[items]['Region'] === 'North America') {
+		american++;
+	}
+	if (organizations[items]['Type of Data Used'] === 'Transportation') {
+		trans++;
+	}
+	avg_year += organizations[items]['Founding Year']
+}
+document.write('There are ' + nonprofit + ' nonprofit organizations listed<BR>');
+document.write('There are ' + age + ' organizations less than a decade old<BR>');
+document.write('There are ' + american + ' organizations located in North America<BR>');
+document.write('There are ' + trans + ' organizations using transportation data type<BR>');
+document.write('The average org. founding year is ' + avg_year/organizations.length + '<BR>');
+
+var x = document.createElement("TABLE");
+x.setAttribute("id", "myTable");
+document.body.appendChild(x);
+
+for (let hello of meta) {
+	var hi = document.createElement('TH');
+	hi.setAttribute('id', 'myTH');
+	document.getElementById('myTable').appendChild(hi);
+	var header = document.createTextNode(hello);
+	hi.appendChild(header);
+}
+
+for (i = 0; i < organizations.length; i++) {
+	var y = document.createElement("TR");
+	y.setAttribute("id", "myTr");
+	document.getElementById("myTable").appendChild(y);
+	for (let j of meta) {
+		var z = document.createElement("TD");
+		var metadata = document.createTextNode(organizations[i][j]);
+		z.appendChild(metadata);
+		y.appendChild(z);
+	}
+	x.appendChild(y);
+}
+
 
 
 </script>
